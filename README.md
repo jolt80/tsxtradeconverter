@@ -1,73 +1,41 @@
-# React + TypeScript + Vite
+# TopstepX Trade Converter
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Converts TopstepX order exports to trade exports for import into journaling tools like Tradezella.
 
-Currently, two official plugins are available:
+**Live app:** https://tsxtradeconverter.web.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Why?
 
-## React Compiler
+TopstepX live funded accounts lack trade export functionality. This tool reconstructs trades from order exports using FIFO position matching, reverse-engineered from sim account data where both exports are available.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+- Client-side processing - no data uploaded or stored
+- Drag & drop CSV interface
+- Supports NQ, MNQ, ES, MES, RTY, M2K, YM, MYM, CL, MCL, GC, MGC and more
+- Fees calculated from [official TopstepX rates](https://help.topstep.com/en/articles/8284231-what-are-the-commissions-and-fees-in-the-live-funded-account)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Limitations
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Trade IDs generated from order IDs (not original platform IDs)
+- Entry/exit timestamps have lower resolution than platform
+- Only tested with NQ and MNQ contracts
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Development
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev      # Dev server
+npm test         # Run tests
+npm run build    # Production build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Deployment
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run build && npx firebase deploy
 ```
+
+## License
+
+MIT

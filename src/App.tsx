@@ -94,7 +94,10 @@ function App() {
           </div>
         )}
         
-        <p className="text-zinc-500 text-xs mt-12 text-center">All processing runs client-side in your browser. No data is uploaded or stored.</p>
+        <div className="text-zinc-500 text-sm mt-12 text-center space-y-2">
+          <p>All processing runs client-side in your browser. No data is uploaded or stored.</p>
+          <p><a href="https://github.com/jolt80/tsxtradeconverter/issues/new?title=%3CBug%20Report%3E&body=%23%23%20Description%0A%3CDescribe%20what's%20wrong%20with%20the%20conversion.%20Include%20expected%20values%20from%20the%20platform%20for%20comparison%20-%20issues%20are%20hard%20to%20debug%20without%20this.%3E%0A%0A%3CAttach%20the%20orders%20CSV%20file.%3E%0A%0A%23%23%20Contact%20email%20(optional)%0A" target="_blank" rel="noopener" className="text-zinc-400 hover:text-zinc-300 underline">Report an issue</a> <span className="text-zinc-600">(requires GitHub login)</span></p>
+        </div>
       </div>
     </div>
   )
